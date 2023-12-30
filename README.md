@@ -1,1 +1,1 @@
-# notifications
+# nm-notifications
