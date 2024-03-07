@@ -1,6 +1,6 @@
 {
   "name": "@nmxjs/notifications",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -28,10 +28,10 @@
   },
   "dependencies": {
     "@nestjs/common": "^10.3.0",
-    "@nmxjs/utils": "^1.0.10",
+    "@nmxjs/utils": "^1.0.13",
     "node-telegram-bot-api": "^0.60.0"
   },
   "peerDependencies": {
-    "@nmxjs/config": "^1.0.5"
+    "@nmxjs/config": "^1.0.11"
   }
 }
