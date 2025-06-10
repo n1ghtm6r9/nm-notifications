@@ -12,6 +12,10 @@ const providers = [
   },
 ];
 
+let notifierEnabled = false;
+
+export const isNotifierEnabled = () => notifierEnabled;
+
 @Global()
 @Module({
   imports: providers.map(p => p.module),
@@ -19,10 +23,13 @@ const providers = [
     ...Object.values(Services),
     {
       provide: notifierKey,
-      useFactory: (sendNotifyService: Services.SendNotifyService, sendErrorNotifyService: Services.SendErrorNotifyService): INotifier => ({
-        send: sendNotifyService.call.bind(sendNotifyService),
-        sendError: sendErrorNotifyService.call.bind(sendErrorNotifyService),
-      }),
+      useFactory: (sendNotifyService: Services.SendNotifyService, sendErrorNotifyService: Services.SendErrorNotifyService): INotifier => {
+        notifierEnabled = true;
+        return {
+          send: sendNotifyService.call.bind(sendNotifyService),
+          sendError: sendErrorNotifyService.call.bind(sendErrorNotifyService),
+        };
+      },
       inject: [Services.SendNotifyService, Services.SendErrorNotifyService],
     },
     {
