@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/n1ghtm6r9/nm-notifications#readme",
   "devDependencies": {
-    "@types/node": "^24.0.0",
+    "@types/node": "^20.10.4",
     "@types/node-telegram-bot-api": "^0.64.9",
     "typescript": "^5.1.6"
   },
