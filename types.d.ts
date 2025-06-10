@@ -3,7 +3,7 @@ declare module '@nmxjs/config' {
     notification?: {
       telegrams?: Array<{
         token: string;
-        chatId: number;
+        chatIds: string[];
       }>;
     };
   }

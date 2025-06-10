@@ -17,7 +17,9 @@ import { telegramNotifierKey } from './constants';
         const telegramClients = config.notification.telegrams.map(telegramConfig => new TelegramBot(telegramConfig.token));
 
         const send = ({ message }) =>
-          Promise.all(telegramClients.map((client, i) => client.sendMessage(config.notification.telegrams[i].chatId, message))).then();
+          Promise.all(
+            telegramClients.map((client, i) => config.notification.telegrams[i].chatIds.map(chatId => client.sendMessage(chatId, message))),
+          ).then();
 
         return {
           send,
