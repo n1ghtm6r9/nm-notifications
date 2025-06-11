@@ -10,6 +10,6 @@ export class SendNotifyService {
     Promise.all(
       Array.from(this.allNotifiers.values())
         .filter(Boolean)
-        .map(v => v.send(options))
+        .map(v => v.send(options)),
     );
 }

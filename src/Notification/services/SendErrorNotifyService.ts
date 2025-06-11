@@ -1,13 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { getFullMessageFromError } from '@nmxjs/utils';
-import { SendNotifyService } from './SendNotifyService';
+import { Inject } from '@nestjs/common';
+import { IAllNotifiers } from '../interfaces';
+import { allNotifiersKey } from '../constants';
 
 @Injectable()
 export class SendErrorNotifyService {
-  constructor(protected readonly sendNotifyService: SendNotifyService) {}
+  constructor(@Inject(allNotifiersKey) protected readonly allNotifiers: IAllNotifiers) {}
 
-  public call = (error: Error) =>
-    this.sendNotifyService.call({
-      message: getFullMessageFromError({ error }),
-    });
+  public call = (options: Error) =>
+    Promise.all(
+      Array.from(this.allNotifiers.values())
+        .filter(Boolean)
+        .map(v => v.sendError(options)),
+    );
 }
