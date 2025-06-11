@@ -27,7 +27,6 @@ import { telegramNotifierKey } from './constants';
           sendError: error => {
             const errorMessage = `
             <b>Error</b>
-            
             <blockquote expandable>${encode(getFullMessageFromError({ error }))}</blockquote>
             `;
             return send(
