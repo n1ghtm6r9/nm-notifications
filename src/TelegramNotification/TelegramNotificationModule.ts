@@ -1,7 +1,6 @@
 import { encode } from 'he';
 import { Module, Global } from '@nestjs/common';
 import { configKey, IConfig } from '@nmxjs/config';
-import { getFullMessageFromError } from '@nmxjs/utils';
 import * as TelegramBot from 'node-telegram-bot-api';
 import type { INotifier } from '../Notification';
 import { telegramNotifierKey } from './constants';
@@ -24,10 +23,10 @@ import { telegramNotifierKey } from './constants';
 
         return {
           send,
-          sendError: error => {
+          sendError: options => {
             const errorMessage = `
             <b>Error</b>
-            <blockquote expandable>${encode(getFullMessageFromError({ error }))}</blockquote>
+            <blockquote expandable>${encode(JSON.stringify(options))}</blockquote>
             `;
             return send(
               {
